@@ -1,0 +1,57 @@
+# --- [ Unreal Engine Core ] ---
+Binaries/*
+Intermediate/*
+DerivedDataCache/*
+Saved/*
+Build/*
+# Except for specific build configs if needed
+!Build/*/Config/
+
+# --- [ IDEs & Compilers ] ---
+# JetBrains Rider
+.idea/
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.suo
+
+# Visual Studio (Unreal generates these even if using Rider)
+.vs/
+*.VC.db
+*.VC.opendb
+*.opendb
+*.sdf
+*.cache
+*.obj
+*.pdb
+*.ilk
+*.lib
+*.exp
+.vsconfig
+
+# --- [ Plugins ] ---
+# Ignores binaries and intermediate files deep within any plugin folder
+Plugins/**/Binaries/*
+Plugins/**/Intermediate/*
+
+# --- [ Platform Specifics ] ---
+Platforms/HoloLens/Config/HoloLensEngine.ini
+Platforms/iOS/Config/IOSEngine.ini
+# Add other platforms (Android, Sony, etc.) as needed
+
+# --- [ Local / User Configs ] ---
+Config/SteamVRBindings/
+Config/steamvr_ue_editor_app.json
+# Don't ignore default project configs, but ignore local user overrides
+*User.ini
+
+# --- [ Source Art & Misc ] ---
+# Large raw assets usually belong in a separate folder or LFS
+# Uncomment these if you keep high-res source files in your project folder
+# SourceArt/
+# Import/
+
+# --- [ System Files ] ---
+.DS_Store
+Thumbs.db
