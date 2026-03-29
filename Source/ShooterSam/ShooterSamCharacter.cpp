@@ -87,6 +87,8 @@ void AShooterSamCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	
+	UE_LOG(LogTemp, Display, TEXT("LookAxisVector: %s"), *LookAxisVector.ToString());
 
 	// route the input
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
