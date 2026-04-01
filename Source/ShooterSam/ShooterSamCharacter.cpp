@@ -65,10 +65,25 @@ void AShooterSamCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AShooterSamCharacter::Look);
+		
+		// Shooting
+		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Started, this, &AShooterSamCharacter::Shoot);
 	}
 	else
 	{
 		UE_LOG(LogShooterSam, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+	}
+}
+
+void AShooterSamCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
+	
+	if (Gun)
+	{
+		Gun->SetOwner(this);
 	}
 }
 
@@ -77,7 +92,7 @@ void AShooterSamCharacter::Move(const FInputActionValue& Value)
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 	
-	UE_LOG(LogTemp, Display, TEXT("MovementVector: %s"), *MovementVector.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("MovementVector: %s"), *MovementVector.ToString());
 
 	// route the input
 	DoMove(MovementVector.X, MovementVector.Y);
@@ -88,10 +103,19 @@ void AShooterSamCharacter::Look(const FInputActionValue& Value)
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
 	
-	UE_LOG(LogTemp, Display, TEXT("LookAxisVector: %s"), *LookAxisVector.ToString());
+	//UE_LOG(LogTemp, Display, TEXT("LookAxisVector: %s"), *LookAxisVector.ToString());
 
 	// route the input
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
+}
+
+void AShooterSamCharacter::Shoot(const FInputActionValue& Value)
+{
+	UE_LOG(LogTemp, Display, TEXT("shoot!"))
+	if (Gun)
+	{
+		Gun->PullTrigger();
+	}
 }
 
 void AShooterSamCharacter::DoMove(float Right, float Forward)

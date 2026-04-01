@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+
+#include "Gun.h"
+
 #include "ShooterSamCharacter.generated.h"
 
 class USpringArmComponent;
@@ -32,7 +35,7 @@ class AShooterSamCharacter : public ACharacter
 	UCameraComponent* FollowCamera;
 	
 protected:
-
+	
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* JumpAction;
@@ -49,6 +52,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MouseLookAction;
 
+	/** Mouse Shoot Input Action */
+	UPROPERTY(EditAnywhere, Category="Input")
+	UInputAction* ShootAction;
+
 public:
 
 	/** Constructor */
@@ -58,6 +65,9 @@ protected:
 
 	/** Initialize input action bindings */
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 protected:
 
@@ -66,6 +76,9 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	/** Called for shooting input */
+	void Shoot(const FInputActionValue& Value); // put it down there???
 
 public:
 
@@ -92,5 +105,12 @@ public:
 
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AGun> GunClass;
+	
+	AGun* Gun;
+		
+	
 };
 
