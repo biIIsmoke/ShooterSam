@@ -23,11 +23,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
+	AController* OwnerController;
+	
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* SceneRoot;
 	
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Mesh;
+	
+	UPROPERTY(EditAnywhere)
+	float MaxRange = 10000.0f;
 	
 	void PullTrigger();
 };
