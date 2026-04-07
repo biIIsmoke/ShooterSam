@@ -5,6 +5,8 @@
 
 #include "Kismet/GameplayStatics.h"
 
+//#define LOG_WARNING(x) UE_LOG(LogTemp, Warning, TEXT(x))
+
 // Sets default values
 AGun::AGun()
 {
@@ -26,6 +28,8 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 	MuzzleFlashParticleSystem->Deactivate();
+	
+	//LOG_WARNING("test log warning cmon");
 }
 
 // Called every frame
