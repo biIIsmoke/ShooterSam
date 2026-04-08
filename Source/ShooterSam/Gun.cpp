@@ -7,6 +7,24 @@
 
 //#define LOG_WARNING(x) UE_LOG(LogTemp, Warning, TEXT(x))
 
+class Shape
+{
+protected:
+	int32 Sides;
+};
+
+class Rectangle : public Shape
+{
+public:
+	void SetSides();
+};
+
+void Rectangle::SetSides()
+{
+	Sides = 4;
+}
+
+
 // Sets default values
 AGun::AGun()
 {
