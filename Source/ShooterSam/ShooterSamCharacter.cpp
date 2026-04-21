@@ -115,15 +115,6 @@ void AShooterSamCharacter::Look(const FInputActionValue& Value)
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
 }
 
-void AShooterSamCharacter::Shoot(const FInputActionValue& Value)
-{
-	UE_LOG(LogTemp, Display, TEXT("shoot!"))
-	if (Gun)
-	{
-		Gun->PullTrigger();
-	}
-}
-
 void AShooterSamCharacter::DoMove(float Right, float Forward)
 {
 	if (GetController() != nullptr)
@@ -166,6 +157,15 @@ void AShooterSamCharacter::DoJumpEnd()
 	StopJumping();
 }
 
+void AShooterSamCharacter::Shoot()
+{
+	UE_LOG(LogTemp, Display, TEXT("shoot!"))
+	if (Gun)
+	{
+		Gun->PullTrigger();
+	}
+}
+
 void AShooterSamCharacter::OnDamageTaken(AActor* DamagedActor, float Damage, const class UDamageType* DamageType,
 	class AController* InstigatedBy, AActor* DamageCauser)
 {
@@ -179,6 +179,7 @@ void AShooterSamCharacter::OnDamageTaken(AActor* DamagedActor, float Damage, con
 			Health = 0.0f;
 			
 			GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			DetachFromControllerPendingDestroy();
 			
 			UE_LOG(LogTemp, Display, TEXT("Characted died: %s"), *GetActorNameOrLabel());
 		}

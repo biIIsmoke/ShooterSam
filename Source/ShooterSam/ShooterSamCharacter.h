@@ -77,9 +77,6 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
-	/** Called for shooting input */
-	void Shoot(const FInputActionValue& Value); // put it down there???
-
 public:
 
 	/** Handles move inputs from either controls or UI interfaces */
@@ -118,6 +115,8 @@ public:
 	bool IsAlive = true;
 	
 	AGun* Gun;
+
+	void Shoot();
 		
 	UFUNCTION()
 	void OnDamageTaken(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
